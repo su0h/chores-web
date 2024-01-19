@@ -11,4 +11,9 @@ export class DateService {
   public getDateStringToday(): String | null {
     return this.datePipe.transform(new Date(), "MMMM d, y (EEEE)");
   }
+
+  public isEvening(): boolean {
+    const date: Date = new Date();
+    return date.getHours() >= 17;
+  }
 }

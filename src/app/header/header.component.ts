@@ -10,8 +10,10 @@ import { DateService } from '../services/date/date-service.service';
 })
 export class HeaderComponent {
   protected dateToday: String | null;
+  protected isEvening: boolean;
   
   constructor(private dateService: DateService) { 
     this.dateToday = this.dateService.getDateStringToday();
+    this.isEvening = this.dateService.isEvening();
   }
 }
