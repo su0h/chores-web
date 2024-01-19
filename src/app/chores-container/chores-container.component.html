@@ -1,10 +1,13 @@
-@if(true) {
-    <div class="w-3/5 mx-auto border-solid border-4 rounded-lg p-3">
-        <app-chore-set [header]="'Evening'"></app-chore-set>
+<div class="w-3/5 mx-auto border-solid border-4 border-zinc-800 rounded-lg">
+    <div class="grid grid-cols-1 w-3/4 mx-auto px-2 py-5">
+        <div class="text-center tasks-header">{{header}}</div>
+        <div class="text-lg">
+            @for(assignee of assignees; track $index) {
+                <div class="grid grid-cols-2 text-center text">
+                    <div><span class="font-bold">{{assignee}}</span></div>
+                    <div>{{tasks[$index]}}</div>
+                </div>
+            }
+        </div>
     </div>
-} @else {
-    <div class="grid grid-cols-2 gap-4 border-solid border-4 rounded-lg p-3">
-        <app-chore-set [header]="'Afternoon'"></app-chore-set>
-        <app-chore-set [header]="'Evening'"></app-chore-set>
-    </div>
-}
+</div>
