@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DateService } from '../services/date/date-service.service';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  protected dateToday: String | null;
+  
+  constructor(private dateService: DateService) { 
+    this.dateToday = this.dateService.getDateStringToday();
+  }
 }
