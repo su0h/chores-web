@@ -9,7 +9,8 @@ export class ChoreService {
 
   constructor() { 
     const day_num = 1;
-    this._assignees = this.rotateArray(this._assignees, day_num);
+    // TODO: initialize _assignees and _tasks with HttpService
+    // this._assignees = this.rotateArray(this._assignees, day_num);
     console.log(this._assignees);
   }
 
@@ -21,20 +22,21 @@ export class ChoreService {
     return [...this._tasks];
   }
 
-  private rotateArray(arr: Array<String>, positions: number): Array<String> {
-    const length = arr.length;
+  // Archived; backend will now handle this
+  // private rotateArray(arr: Array<String>, positions: number): Array<String> {
+  //   const length = arr.length;
 
-    // Ensure a valid number of positions
-    positions = positions % length;
+  //   // Ensure a valid number of positions
+  //   positions = positions % length;
   
-    // Handle negative positions
-    if (positions < 0) {
-      positions = length + positions;
-    }
+  //   // Handle negative positions
+  //   if (positions < 0) {
+  //     positions = length + positions;
+  //   }
   
-    // Rotate the array
-    const rotatedArray = [...arr.slice(-positions), ...arr.slice(0, length - positions)];
+  //   // Rotate the array
+  //   const rotatedArray = [...arr.slice(-positions), ...arr.slice(0, length - positions)];
   
-    return rotatedArray;
-  }
+  //   return rotatedArray;
+  // }
 }
