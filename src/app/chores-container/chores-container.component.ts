@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChoreService } from './chore.service';
+import { ChoreService } from '../services/chore/chore.service';
 
 @Component({
   selector: 'app-chores-container',
