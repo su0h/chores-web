@@ -2,10 +2,10 @@
     <div class="grid grid-cols-1 w-3/4 mx-auto px-2 py-5">
         <div class="text-center tasks-header">{{header}}</div>
         <div class="text-lg">
-            @for(assignee of assignees; track $index) {
+            @for(taskAssignment of taskAssignments; track $index) {
                 <div class="grid grid-cols-2 text-center text">
-                    <div><span class="font-bold">{{assignee}}</span></div>
-                    <div>{{tasks[$index]}}</div>
+                    <div><span class="font-bold">{{taskAssignment.assignee}}</span></div>
+                    <div>{{taskAssignment.task}}</div>
                 </div>
             }
         </div>

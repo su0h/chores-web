@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChoreService } from '../services/chore/chore.service';
+import { TaskAssignment } from '../models/task.assignment';
 
 @Component({
   selector: 'app-chores-container',
@@ -9,18 +10,15 @@ import { ChoreService } from '../services/chore/chore.service';
   styleUrl: './chores-container.component.css'
 })
 export class ChoresContainerComponent implements OnInit {
-  protected assignees: Array<String>;
-  protected tasks: Array<String>;
+  protected taskAssignments: Array<TaskAssignment>;
   @Input() header: String;
 
-  constructor(protected choreService: ChoreService) {
-    this.assignees = [];
-    this.tasks = [];
+  constructor(private choreService: ChoreService) {
+    this.taskAssignments = [];
     this.header = '';
   }
 
   ngOnInit(): void {
-    this.assignees = this.choreService.assignees;
-    this.tasks = this.choreService.tasks;
+    this.taskAssignments = this.choreService.getTaskAssignments();
   }
 }
