@@ -6,6 +6,9 @@ import { ChoresContainerComponent } from './chores-container/chores-container.co
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,11 +17,33 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'chores';
-  faUndo = faUndo;
+  protected faUndo = faUndo;
+
+  constructor(private dialog: MatDialog) { }
 
   protected revertTaskAssignments(): void {
-    // TODO: Implement this functionality (API call to backend to unshift)
-    console.log("TODO");
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.data = {
+      message: "Are you sure you want to reverse the task assignments?"
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, dialogConfig);
+    
+    dialogRef.afterClosed().subscribe(userConfirmed => {
+      if (userConfirmed) {
+        console.log('User clicked Yes');
+        // Perform the action when the user clicks 'Yes'
+        // TODO: Implement this functionality (API call to backend to unshift)
+        console.log("TODO");
+      }
+    });
+
+    dialogRef.backdropClick().subscribe(() => {
+      dialogRef.close(false);
+    });
   }
 }

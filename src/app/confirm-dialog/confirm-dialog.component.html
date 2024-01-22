@@ -1,0 +1,10 @@
+<div class="w-64 p-5">
+    <h1 mat-dialog-title>Confirmation</h1>
+    <div mat-dialog-content class="mb-5">
+      <p>{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions class="w-max mx-auto">
+      <button mat-raised-button (click)="onNoClick()">No</button>
+      <button mat-raised-button class="primary-btn" (click)="onYesClick()">Yes</button>
+    </div>
+</div>
