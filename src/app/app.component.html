@@ -6,10 +6,14 @@
         <app-chores-container></app-chores-container>
     </div>
     <div class="grid grid-cols-1">
-        <fa-icon 
-            class="mx-auto back-icon hover:cursor-pointer hover:opacity-85 w-12 h-12 p-3 shadow-md rounded-2xl" 
-            [icon]="faUndo" 
+        <div 
+            class="flex justify-center align-middle back-icon mx-auto shadow-md rounded-2xl w-12 h-12 hover:cursor-pointer hover:opacity-85"
             (click)="revertTaskAssignments()"
-        ></fa-icon>
+        >
+            <fa-icon 
+                class="my-auto" 
+                [icon]="faUndo" 
+            ></fa-icon>
+        </div>
     </div>
 </div>
