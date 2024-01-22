@@ -1,16 +1,14 @@
 
 <div class="h-screen grid grid-cols-1 content-center w-3/4 lg:w-2/3 min-w-96 mx-auto">
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1 mb-10">
         <app-header></app-header>
     </div>
-    <br>
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1 mb-10">
         <app-chores-container></app-chores-container>
     </div>
-    <br>
     <div class="grid grid-cols-1">
         <fa-icon 
-            class="mx-auto back-icon hover:cursor-pointer hover:opacity-85 px-4 py-2 shadow-md rounded-2xl" 
+            class="mx-auto back-icon hover:cursor-pointer hover:opacity-85 w-12 h-12 p-3 shadow-md rounded-2xl" 
             [icon]="faUndo" 
             (click)="revertTaskAssignments()"
         ></fa-icon>
