@@ -5,9 +5,9 @@ import { HeaderComponent } from './header/header.component';
 import { ChoresContainerComponent } from './chores-container/chores-container.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
-
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
