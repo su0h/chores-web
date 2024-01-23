@@ -1,37 +1,64 @@
-import { Injectable, OnInit } from '@angular/core';
-import { TaskAssignmentService } from '../task-service/task.service';
+import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TaskAssignment } from '../../models/task.assignment';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChoreService {
-  // private _assignees: Array<String> = ["Person 1", "Person 2", "Person 3"];
-  // private _tasks: Array<String> = ["Hain", "Ligpit", "Hugas"];
   private _taskAssignments: Array<TaskAssignment>;
+  private tasksApi = "http://192.168.1.92:8080/api/v1.0/task-assignments"
 
-  constructor(private taskAssignmentService: TaskAssignmentService) {
+  // For "notifying" components that there is an update with the taskAssignment list
+  // Reference: https://stackoverflow.com/questions/38836674/how-do-i-re-render-a-component-manually
+  public areTasksChanged: BehaviorSubject<boolean>;
+
+  constructor(
+    private http: HttpClient
+  ) {
+    this.areTasksChanged = new BehaviorSubject<boolean>(false);
     this._taskAssignments = [];
-    this.taskAssignmentService.getTaskAssignments()
-    .subscribe(response => {
-        response.taskAssignments.map((taskAssignment: any) => {
-          this._taskAssignments.push(
-            new TaskAssignment(
-              taskAssignment.taskName, 
-              taskAssignment.personName
-            )
-          );
-        });
+    this.getTaskAssignments();
+  }
 
-        // this._taskAssignments = response.taskAssignments;
-        console.log(response);
-        console.log(this._taskAssignments);
+  public get taskAssignments(): Array<TaskAssignment> {
+    return this._taskAssignments;
+  }
+
+  private getTaskAssignments(): void {
+    this.http.get<any>(this.tasksApi)
+    .subscribe(response => {
+        this.parseTaskAssignmentResponse(response);
       }
     );
   }
 
-  public getTaskAssignments(): Array<TaskAssignment> {
-    return this._taskAssignments;
+  public unshiftTaskAssignments(): void {
+    this.http.post(this.tasksApi + "/unshift", {})
+    .subscribe(response => {
+      // Empty the current list first
+      this._taskAssignments = [];
+
+      // Update it
+      this.parseTaskAssignmentResponse(response);
+      this.areTasksChanged.next(true);
+    });
+  }
+
+  // Since taskAssignments are found inside the response JSON
+  private parseTaskAssignmentResponse(response: any): void {
+    response.taskAssignments.map((taskAssignment: any) => {
+      this._taskAssignments.push(
+        new TaskAssignment(
+          taskAssignment.taskName, 
+          taskAssignment.personName
+        )
+      );
+
+    });
+
+    console.log(this._taskAssignments);
   }
 
   // public get assignees(): Array<String> {

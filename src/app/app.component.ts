@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ChoreService } from './services/chore/chore.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppComponent {
   protected faUndo = faUndo;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog, 
+    private choreService: ChoreService
+  ) { }
 
   protected revertTaskAssignments(): void {
     const dialogConfig = new MatDialogConfig();
@@ -39,6 +42,8 @@ export class AppComponent {
         // Perform the action when the user clicks 'Yes'
         // TODO: Implement this functionality (API call to backend to unshift)
         console.log("TODO");
+        
+        this.choreService.unshiftTaskAssignments();
       }
     });
 

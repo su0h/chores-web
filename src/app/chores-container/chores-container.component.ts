@@ -21,7 +21,20 @@ export class ChoresContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskAssignments = this.choreService.getTaskAssignments();
+    this.taskAssignments = this.choreService.taskAssignments;
+    
+    // Whenever there are updates to the taskAssignment list
+    this.choreService.areTasksChanged.subscribe(value => {
+      if (value) {
+        // Empty the current list first
+        this.taskAssignments = [];
+
+        // Then retrieve the updated list
+        this.choreService.taskAssignments.forEach(taskAssignment => {
+          this.taskAssignments.push(taskAssignment);
+        })
+      }
+    })
     // this.containerColors = [
     //   "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", 
     //   "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"
