@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ChoreService {
   private _taskAssignments: Array<TaskAssignment>;
   private tasksApi = "http://192.168.1.92:8080/api/v1.0/task-assignments"
+  private _lastModified: Date;
 
   // For "notifying" components that there is an update with the taskAssignment list
   // Reference: https://stackoverflow.com/questions/38836674/how-do-i-re-render-a-component-manually
@@ -19,6 +20,7 @@ export class ChoreService {
   ) {
     this.areTasksChanged = new BehaviorSubject<boolean>(false);
     this._taskAssignments = [];
+    this._lastModified = new Date();
     this.getTaskAssignments();
   }
 
@@ -26,21 +28,28 @@ export class ChoreService {
     return this._taskAssignments;
   }
 
+  public get lastModified(): Date {
+    return this._lastModified;
+  }
+
   private getTaskAssignments(): void {
     this.http.get<any>(this.tasksApi)
     .subscribe(response => {
+        this._lastModified = new Date(response.lastModified);
         this.parseTaskAssignmentResponse(response);
+        this.areTasksChanged.next(true);
       }
     );
   }
 
   public unshiftTaskAssignments(): void {
-    this.http.post(this.tasksApi + "/unshift", {})
+    this.http.post<any>(this.tasksApi + "/unshift", {})
     .subscribe(response => {
       // Empty the current list first
       this._taskAssignments = [];
 
       // Update it
+      this._lastModified = new Date(response.lastModified);
       this.parseTaskAssignmentResponse(response);
       this.areTasksChanged.next(true);
     });
@@ -57,8 +66,8 @@ export class ChoreService {
       );
 
     });
-
-    console.log(this._taskAssignments);
+    
+    this._lastModified = response.lastModified;
   }
 
   // public get assignees(): Array<String> {

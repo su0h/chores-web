@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { ChoresContainerComponent } from './chores-container/chores-container.component';
@@ -18,11 +18,27 @@ import { ChoreService } from './services/chore/chore.service';
 })
 export class AppComponent {
   protected faUndo = faUndo;
+  protected lastModified: string | null;
 
   constructor(
     private dialog: MatDialog, 
-    private choreService: ChoreService
-  ) { }
+    private choreService: ChoreService, 
+    private datePipe: DatePipe
+  ) {
+    this.lastModified = this.datePipe.transform(
+      choreService.lastModified, 
+      'medium'
+    );
+
+    this.choreService.areTasksChanged.subscribe(value => {
+      if (value) {
+        this.lastModified = this.datePipe.transform(
+          choreService.lastModified, 
+          'medium'
+        );
+      }
+    })
+  }
 
   protected revertTaskAssignments(): void {
     const dialogConfig = new MatDialogConfig();
@@ -38,11 +54,7 @@ export class AppComponent {
     
     dialogRef.afterClosed().subscribe(userConfirmed => {
       if (userConfirmed) {
-        console.log('User clicked Yes');
         // Perform the action when the user clicks 'Yes'
-        // TODO: Implement this functionality (API call to backend to unshift)
-        console.log("TODO");
-        
         this.choreService.unshiftTaskAssignments();
       }
     });
