@@ -1,10 +1,22 @@
-
-<div class="h-screen grid grid-cols-1 content-center w-3/4 lg:w-1/3 min-w-96 mx-auto">
-    <div class="grid grid-cols-1">
+<div class="h-screen grid grid-cols-1 content-center w-3/4 lg:w-2/3 min-w-96 mx-auto">
+    <div class="grid grid-cols-1 mb-5">
         <app-header></app-header>
     </div>
-    <br>
-    <div class="grid grid-cols-1">
+    <div class="grid grid-cols-1 mb-5">
         <app-chores-container></app-chores-container>
+    </div>
+    <div class="text-center mb-5 text-xs">
+        Last Modified: {{lastModified}}
+    </div>
+    <div class="grid grid-cols-1">
+        <div 
+            class="flex justify-center align-middle back-icon mx-auto shadow-md rounded-2xl w-12 h-12 hover:cursor-pointer hover:opacity-85"
+            (click)="revertTaskAssignments()"
+        >
+            <fa-icon 
+                class="my-auto" 
+                [icon]="faUndo" 
+            ></fa-icon>
+        </div>
     </div>
 </div>

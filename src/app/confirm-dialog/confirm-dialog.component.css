@@ -1,0 +1,47 @@
+/* :host {
+    display: block;
+    font-family: 'Arial', sans-serif;
+} */
+
+h1 {
+    color: #05396B;
+}
+
+p {
+    margin: 0;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+.primary-btn {
+    background-color: #05396B !important;
+    color: white !important;
+}
+
+button {
+    margin-left: 8px;
+}
+
+/* Optional: Add some animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}
+
+.mat-dialog-container {
+    animation: fadeIn 0.3s ease-in-out;
+}
+  
