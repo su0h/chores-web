@@ -2,13 +2,14 @@ import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TaskAssignment } from '../../models/task.assignment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChoreService {
   private _taskAssignments: Array<TaskAssignment>;
-  private tasksApi = "http://192.168.1.92:8080/api/v1.0/task-assignments"
+  private tasksApi = environment.API_URL;
   private _lastModified: Date;
 
   // For "notifying" components that there is an update with the taskAssignment list
