@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChoreService } from '../services/chore/chore.service';
 import { TaskAssignment } from '../models/task.assignment';
+import { faSink, faUtensils, faAlignJustify } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-chores-container',
   standalone: true,
-  imports: [],
+  imports: [FontAwesomeModule],
   templateUrl: './chores-container.component.html',
   styleUrl: './chores-container.component.css'
 })
@@ -39,6 +41,40 @@ export class ChoresContainerComponent implements OnInit {
     //   "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", 
     //   "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"
     // ];
+  }
+
+  protected getClass(choreName: String): string {
+    // Sample Target Class: chore-text col-span-2 rounded-2xl shadow-md mb-3 p-6 bg-pink-200 hover:bg-pink-300
+    let baseClass: string = "chore-text col-span-2 rounded-2xl shadow-md mb-3 p-6";
+    
+    switch (choreName.toLowerCase()) {
+      case "hain":
+        baseClass += " bg-green-200 hover:bg-green-300";
+        break;
+      case "ligpit":
+        baseClass += " bg-red-200 hover:bg-red-300";
+        break;
+      case "hugas":
+        baseClass += " bg-sky-200 hover:bg-sky-300";
+        break;
+      default:
+        baseClass += " bg-stone-200 hover:bg-stone-300";
+    }
+
+    return baseClass;
+  }
+
+  protected getIcon(choreName: String): any {
+    switch (choreName.toLowerCase()) {
+      case "hain":
+        return faUtensils;
+      case "ligpit":
+        return faAlignJustify;
+      case "hugas":
+        return faSink;
+      default:
+        return null;
+    }
   }
 
   // NOTE: Removed these for now (since pink is the temporary go-to color)
