@@ -16,7 +16,7 @@ This "collective second-guessing" can sometimes be a tedious scenario to deal wi
 
 ## Installation
 1. Build a Docker image using the Dockerfile provided at the root directory of the project: `docker build -t <image_name> .`
-2. Run the image in a container with the following command: `docker run -p 4200:4200 -e API_URL=<API_URL> <image_name>`
+2. Run the image in a container with the following command: `docker run -p 4200:4200 -e API_BASE_URL=<API_BASE_URL> <image_name>`
 3. Access the Angular application via `http://localhost:4200`
 4. Though this application will run on its own, to fully experience Chores, also follow the installation instructions found in the `chores-host` repository.
 
