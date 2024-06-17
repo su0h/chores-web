@@ -15,9 +15,10 @@ This "collective second-guessing" can sometimes be a tedious scenario to deal wi
 *P.S. I decided to add a Spring Boot backend since I needed to keep track of the current state of task assignments, and I also needed to keep track of when to shift once or twice (or even undo a shift when no chores were done for a certain schedule; this required a database). I simply could not make this work with an Angular frontend alone.*
 
 ## Installation
-1. Build a Docker image using the Dockerfile provided at the root directory of the project: `docker build <image_name> .`
-2. Run the image in a container with the following command: `docker run -p 4200:4200 <image_name>`
+1. Build a Docker image using the Dockerfile provided at the root directory of the project: `docker build -t <image_name> .`
+2. Run the image in a container with the following command: `docker run -p 4200:4200 -e API_URL=<API_URL> <image_name>`
 3. Access the Angular application via `http://localhost:4200`
+4. Though this application will run on its own, to fully experience Chores, also follow the installation instructions found in the `chores-host` repository.
 
 ## Screenshots
 <img title="Mobile View" alt="Mobile View" src="/screenshots/mobile-view.png" height="300px">
