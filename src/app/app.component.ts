@@ -47,6 +47,7 @@ export class AppComponent {
     dialogConfig.autoFocus = false;
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = {
+      header: "Confirmation", 
       message: "Are you sure you want to reverse the task assignments?"
     };
 

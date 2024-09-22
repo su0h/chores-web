@@ -4,7 +4,8 @@
 } */
 
 h1 {
-    color: #05396B;
+    /* color: #05396B; */
+    color: black;
 }
 
 p {
@@ -16,7 +17,8 @@ p {
 }
 
 .primary-btn {
-    background-color: #05396B !important;
+    /* background-color: #05396B !important; */
+    background-color: black !important;
     color: white !important;
 }
 

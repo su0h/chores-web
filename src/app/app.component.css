@@ -1,5 +1,10 @@
 .back-icon {
     font-size: 25px;
     color: white;
-    background-color: #05396B;
+    /* background-color: #05396B; */
+    background-color: rgb(12 10 9);
+}
+
+.back-icon:hover {
+    background-color: rgb(28 25 23);
 }

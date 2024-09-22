@@ -2,11 +2,13 @@
     font-family: 'bebas-neue';
     /* font-size: 5.5rem; */
     line-height: 80%;
-    color: #05396B;
+    /* color: #05396B; */
+    color: rgb(12 10 9);
 }
 
 .header-date {
     font-family: 'roboto-reg';
     /* font-size: 2rem; */
-    color: #00377D;
+    /* color: #00377D; */
+    color: rgb(12 10 9);
 }
