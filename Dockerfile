@@ -4,11 +4,11 @@ WORKDIR /app
 
 # Install dependencies and copy the necessary files
 RUN apt-get update && apt-get install -y gettext
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
-RUN ng build
 COPY . .
 COPY entrypoint.sh /app/entrypoint.sh
+RUN npm run build
 
 # Stage 2: Create the final image
 FROM nginx:1.19
