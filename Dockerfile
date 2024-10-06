@@ -6,9 +6,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y gettext
 COPY package*.json ./
 RUN npm install
+RUN ng build
 COPY . .
 COPY entrypoint.sh /app/entrypoint.sh
-RUN ng build
 
 # Stage 2: Create the final image
 FROM nginx:1.19
